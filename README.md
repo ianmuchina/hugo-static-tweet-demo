@@ -48,7 +48,10 @@ default.
 
 ```scss
 // `assets/hugo-tweet/_overrides.scss`
-.tweet {@extend .light;font-family: sans-serif;}
+.tweet {
+    @extend .light;
+    font-family: sans-serif;
+}
 ```
 
 ## Deployment
