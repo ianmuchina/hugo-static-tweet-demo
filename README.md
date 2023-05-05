@@ -1,37 +1,54 @@
 # hugo-static-tweet-demo
 
-Demo site
+Example repo showcasing hugo tweet component.
 
-https://gohugo.io/getting-started/quick-start/
+## tldr
 
-```
+Copy paste this to make a quick example repo. 
+
+Ensure you're using hugo extended and the version is `110` or later.
+
+```bash
+#!/bin/bash
+# Create new site
 hugo new site quickstart
 cd quickstart
+# initialize git repo
 git init
+# add anake theme
 git submodule add https://github.com/theNewDynamic/gohugo-theme-ananke themes/ananke
+# add static tweet theme
 git submodule add https://github.com/ianmuchina/hugo-static-tweet.git themes/hugo-static-tweet
+# add toml config
 echo "theme = ['hugo-static-tweet', 'ananke']" >> config.toml
-hugo server
+# add new draft post
+hugo new posts/tweet.md
+# add tweet to post
+echo '{{<tweet id="20">}}' >> content/posts/tweet.md
+# add css overrides to make it look nice
+mkdir assets/hugo-tweet/ 
+touch assets/hugo-tweet/_overrides.scss
+echo ".tweet { @extend .light; font-family: sans-serif; }" > assets/hugo-tweet/_overrides.scss
+# start hugo server
+hugo server -D
 ```
 
 The important files:
 
-`config.toml` adds the theme component and the actual theme.
+`config.toml` adds the tweet component and the anake theme.
 
 ```toml
 # config.toml
 theme = ['hugo-static-tweet', 'ananke']
 ```
 
-`assets/hugo-tweet/_overrides.scss` explicitly sets a font family and sets the tweet color theme
-to just light. 
+
+`assets/hugo-tweet/_overrides.scss` explicitly sets a font family and sets the light theme as 
+default. 
 
 ```scss
-// assets/hugo-tweet/_overrides.scss
-.tweet {
-    @extend .light;
-    font-family: sans-serif;
-}
+// `assets/hugo-tweet/_overrides.scss`
+.tweet {@extend .light;font-family: sans-serif;}
 ```
 
 ## Deployment
